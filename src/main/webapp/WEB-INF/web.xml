@@ -33,5 +33,14 @@
     <url-pattern>/products/*</url-pattern>
   </servlet-mapping>
 
+  <error-page>
+    <exception-type>java.util.NoSuchElementException</exception-type>
+    <location>/WEB-INF/pages/NoSuchElement.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/pages/404.jsp/</location>
+</error-page>
 
 </web-app>

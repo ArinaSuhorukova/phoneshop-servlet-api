@@ -1,5 +1,6 @@
 package com.es.phoneshop.model.product;
 
+
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
@@ -26,29 +27,28 @@ public class ArrayListProductDao implements ProductDao {
     private ArrayListProductDao(){}
 
     @Override
-    public Product getProduct(Long id) {
-        for (Product product: products) {
-            if(product.getId().equals(id)){
-                return product;
-            }
-        }
-        return null;
+    public Product getProduct (Long id) throws NoSuchElementException {
+        Optional<Product> product = products.stream()
+                .filter(x-> x.getId().equals(id))
+                .findFirst();
+        if(product.isPresent())
+            return product.get();
+        throw new NoSuchElementException();
+    }
+    private static Map<String,Comparator<Product>> comparators = new HashMap<>();
+    static {
+        comparators.put("description",comparing(Product::getDescription) );
+        comparators.put("price", comparing(Product::getPrice));
     }
 
     private Comparator<Product> choseComparator(String sortField, String order) {
         if (sortField != null && order != null) {
-            if (sortField.equals("description")) {
-                if (order.equals("asc")) {
-                    return comparing(Product::getDescription);
-                } else if (order.equals("desc")) {
-                    return comparing(Product::getDescription).reversed();
-                }
-            } else if (sortField.equals("price")) {
-                if (order.equals("asc")) {
-                    return comparing(Product::getPrice);
-                } else if (order.equals("desc")) {
-                    return comparing(Product::getPrice).reversed();
-                }
+            Comparator<Product> result = comparators.get(sortField);
+            if(order.equals("desc")){
+                return result.reversed();
+            }
+            else if(order.equals("asc")) {
+                return result;
             }
         }
         //вот тут я не знаю, как адекватно возвращать пустой компоратор
@@ -62,14 +62,14 @@ public class ArrayListProductDao implements ProductDao {
     @Override
     public List<Product> findProducts(String query, String sortField, String order) {
         List<Product> result = this.products;
-        if(query!= null && query != "") {
+        if(query!= null && !query.equals("")) {
             Map<Product, Integer> map = new HashMap<>();
             for (Product product : result) {
                 map.put(product, 0);
             }
-            String[] words = query.split("\\s");
+            String[] words = query.toLowerCase().split("\\s");
             for (String word : words) {
-                for (Product product : result.stream().filter(x -> x.getDescription().contains(word)).collect(Collectors.toList())) {
+                for (Product product : result.stream().filter(x -> x.getDescription().toLowerCase().contains(word)).collect(Collectors.toList())) {
                     map.put(product, map.get(product) + 1);
                 }
             }
@@ -78,8 +78,7 @@ public class ArrayListProductDao implements ProductDao {
                     .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
                             (oldValue, newValue) -> oldValue, LinkedHashMap::new));
-            result = map.keySet().stream()
-                    .collect(Collectors.toList());
+            result = new ArrayList<>(map.keySet());
         }
 
         return result.stream()
@@ -89,10 +88,15 @@ public class ArrayListProductDao implements ProductDao {
     }
 
     @Override
-    public void save(Product product) {
-       if(getProduct(product.getId()) == null){
-           products.add(product);
-       }
+    public void save(Product product)  {
+        boolean productInList = products.stream()
+                .noneMatch(product::equals);
+        if (productInList) {
+            products.add(product);
+        }
+        else{
+            //???
+        }
     }
 
     @Override

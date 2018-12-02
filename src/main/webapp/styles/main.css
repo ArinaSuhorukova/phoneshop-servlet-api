@@ -19,10 +19,17 @@ table {
 td {
   padding: 10px;
   border : 1px solid gray;
+  vertical-align: top;
 }
-.price {
+.price, .number {
   text-align: right;
 }
 .product-list img {
   max-width: 64px;
+}
+.success{
+  color: green;
+}
+.error{
+  color: red;
 }

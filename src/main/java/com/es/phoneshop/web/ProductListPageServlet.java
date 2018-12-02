@@ -12,11 +12,12 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class ProductListPageServlet extends HttpServlet {
     private ArrayListProductDao dao;
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NoSuchElementException {
         request.setAttribute("products", dao.findProducts(
                 request.getParameter("query"),
                 request.getParameter("sort"),
@@ -26,7 +27,7 @@ public class ProductListPageServlet extends HttpServlet {
     }
 
     @Override
-    public void init() throws ServletException{
+    public void init() throws ServletException, NoSuchElementException{
         super.init();
         dao = ArrayListProductDao.getInstance();
 

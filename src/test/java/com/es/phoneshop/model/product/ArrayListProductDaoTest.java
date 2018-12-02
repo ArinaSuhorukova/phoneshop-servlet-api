@@ -34,7 +34,7 @@ public class ArrayListProductDaoTest
     public void testProductSortingByDescription(){
         testArrayListProductDao.save(new Product(2L, "sgs2", "Samsung Galaxy S II", new BigDecimal(200), USD, 2, "https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/Samsung/Samsung%20Galaxy%20S%20II.jpg"));
         testArrayListProductDao.save(new Product(3L, "sgs3", "Samsung Galaxy S III", new BigDecimal(100), USD, 5, "https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/Samsung/Samsung%20Galaxy%20S%20III.jpg"));
-        testArrayListProductDao.save(new Product(3L, "apple", "Apple", new BigDecimal(100), USD, 5, "https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/Samsung/Samsung%20Galaxy%20S%20III.jpg"));
+        testArrayListProductDao.save(new Product(3L, "apple", "Apple", new BigDecimal(100), USD, 4, "https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/Samsung/Samsung%20Galaxy%20S%20III.jpg"));
         assertTrue(testArrayListProductDao.findProducts(null,"description","asc").get(0).getCode().equals("apple"));
 
     }

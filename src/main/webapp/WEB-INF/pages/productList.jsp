@@ -7,6 +7,7 @@
 <html>
 <head>
   <title>Product List</title>
+  <c:url var="contextLink" context="${pageContext.servletContext.contextPath}" value="/products"/>
   <link href='http://fonts.googleapis.com/css?family=Lobster+Two' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/styles/main.css">
 </head>
@@ -22,6 +23,8 @@
     Welcome to Expert-Soft training!
   </p>
   <form>
+    <input type="hidden" name="sort" value="${param.sort}">
+    <input type="hidden" name="order" value="${param.order}">
     <input name="query" value="${param.query}">
 <button>Search</button>
 </form>
@@ -30,12 +33,12 @@
 <tr>
   <td>Image</td>
   <td>Description
-    <a href="${pageContext.servletContext.contextPath}/products?sort=description&order=asc&query=${param.query}">asc</a><text>  </text>
-    <a href="${pageContext.servletContext.contextPath}/products?sort=description&order=desc&query=${param.query}">desc</a>
+    <a href="${contextLink}?sort=description&order=asc&query=${param.query}">asc</a><text>  </text>
+    <a href="${contextLink}?sort=description&order=desc&query=${param.query}">desc</a>
   </td>
   <td class="price">Price
-    <a href="${pageContext.servletContext.contextPath}/products?sort=price&order=asc&query=${param.query}">asc</a><text>  </text>
-    <a href="${pageContext.servletContext.contextPath}/products?sort=price&order=desc&query=${param.query}">desc</a>
+    <a href="${contextLink}?sort=price&order=asc&query=${param.query}">asc</a><text>  </text>
+    <a href="${contextLink}?sort=price&order=desc&query=${param.query}">desc</a>
 
   </td>
 </tr>
