@@ -1,12 +1,12 @@
-package com.es.phoneshop.model.product;
+package com.es.phoneshop.model;
 
+import com.es.phoneshop.model.product.ArrayListProductDao;
+import com.es.phoneshop.model.product.Product;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Currency;
-import java.util.List;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;

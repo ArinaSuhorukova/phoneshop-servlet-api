@@ -2,17 +2,16 @@ package com.es.phoneshop.web;
 
 import com.es.phoneshop.model.product.ArrayListProductDao;
 import com.es.phoneshop.model.product.Product;
-import com.es.phoneshop.model.product.cart.CartService;
-import com.es.phoneshop.model.product.cart.CartServiceImpl;
-import com.es.phoneshop.model.product.cart.ViewedProductsService;
-import com.es.phoneshop.model.product.cart.ViewedProductsServiceImpl;
+import com.es.phoneshop.model.cart.CartService;
+import com.es.phoneshop.model.cart.CartServiceImpl;
+import com.es.phoneshop.model.cart.ViewedProductsService;
+import com.es.phoneshop.model.cart.ViewedProductsServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.*;
 
 public class ProductDetailsPageServlet extends HttpServlet {

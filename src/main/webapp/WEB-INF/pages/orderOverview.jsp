@@ -4,18 +4,8 @@
 <%@taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
 <tags:master pageTitle="Checkout">
-    <jsp:useBean id="cart" type="com.es.phoneshop.model.cart.Cart" scope="request"/>
-    <form method="post" action="${pageContext.servletContext.contextPath}/orderOverview">
-        <c:if test="${not empty quantityErrors}">
-            <p class="error">Failed to update</p>
-        </c:if>
-        <c:if test="${not empty param.deletionError}">
-            <p class="error">Failed to delete</p>
-        </c:if>
-        <c:if test="${not empty param.message}">
-            <p class="success">${param.message}</p>
-        </c:if>
-
+    <jsp:useBean id="order" type="com.es.phoneshop.model.order.Order" scope="request"/>
+    <p>Thank you for your order!</p>
         <table>
             <tr>
                 <td></td>
@@ -32,23 +22,19 @@
                                  src="https://raw.githubusercontent.com/andrewosipenko/phoneshop-ex..${item.product.imageUrl}">
                         </a>
                     </td>
+                    <td>
+                        <a href="<c:url value="/products/${item.product.id}"/> ">
+                                ${item.product.description}
+                        </a>
+                    </td>
 
-                    <td>${item.product.description}</td>
-                    <td><fmt:formatNumber value="${item.product.price}" type="currency"
+                    <td>
+                        <fmt:formatNumber value="${item.product.price}" type="currency"
                                           currencySymbol="${item.product.currency.symbol}"/></td>
                     <td>
-                        <input name="quantity"
-                               value="${not empty quantityErrors[item.product.id] ? paramValues['quantity'][status.index] : item.quantity}"
-                               class="number" />
-                        <input type="hidden" name="productId" value="${item.product.id}">
-                        <c:if test="${not empty quantityErrors[item.product.id]}">
-                            <p class="error">${quantityErrors[item.product.id]}</p>
-                        </c:if>
+                            ${item.quantity}
                     </td>
-                    <td>
-                        <button formaction="${pageContext.servletContext.contextPath}/cart/${item.product.id}">Delete
-                        </button>
-                    </td>
+
                 </tr>
             </c:forEach>
             <tr>
@@ -63,7 +49,6 @@
         <input name="deliveryAddress" placeholder="deliveryAddress">
         <br><br>
         <input name="phone" placeholder="phone">
-<br><br>
+
         <button>Place order</button>
-    </form>
 </tags:master>

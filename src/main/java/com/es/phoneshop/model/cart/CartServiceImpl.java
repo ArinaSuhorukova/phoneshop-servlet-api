@@ -1,4 +1,4 @@
-package com.es.phoneshop.model.product.cart;
+package com.es.phoneshop.model.cart;
 
 import com.es.phoneshop.model.product.Product;
 
@@ -80,5 +80,11 @@ public class CartServiceImpl implements CartService {
                 .map(item -> item.getProduct().getPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
                 .reduce(BigDecimal.ZERO, (x,y) -> x.add(y));
         cart.setTotalPrice(totalPrice);
+    }
+
+    @Override
+    public void clearCart(Cart cart) {
+        cart.getCartItems().clear();
+        recalculateCart(cart);
     }
 }

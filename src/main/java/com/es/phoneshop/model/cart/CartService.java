@@ -1,4 +1,4 @@
-package com.es.phoneshop.model.product.cart;
+package com.es.phoneshop.model.cart;
 
 import com.es.phoneshop.model.product.Product;
 
@@ -11,4 +11,5 @@ public interface CartService {
     boolean delete(Cart cart, Product product);
     void updateCart(Cart cart, Product product, Integer quantity);
     void recalculateCart(Cart cart);
+    void clearCart(Cart cart);
 }
