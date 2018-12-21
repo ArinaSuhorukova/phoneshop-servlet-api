@@ -34,6 +34,16 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>addReview</servlet-name>
+    <servlet-class>com.es.phoneshop.web.AddReviewServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>addReview</servlet-name>
+    <url-pattern>/products/addReview/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>cart</servlet-name>
     <servlet-class>com.es.phoneshop.web.CartPageServlet</servlet-class>
   </servlet>
@@ -77,7 +87,6 @@
     <servlet-name>orderOverview</servlet-name>
     <url-pattern>/orderOverview/*</url-pattern>
   </servlet-mapping>
-
 
   <servlet>
     <servlet-name>orderOverview</servlet-name>

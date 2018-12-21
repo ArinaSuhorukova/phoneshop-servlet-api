@@ -1,13 +1,8 @@
-package com.es.phoneshop.web;
+package com.es.phoneshop.model.order;
 
-import com.es.phoneshop.model.UserBean;
+import com.es.phoneshop.model.beans.UserBean;
 import com.es.phoneshop.model.cart.Cart;
-import com.es.phoneshop.model.order.ArrayListOrderDao;
-import com.es.phoneshop.model.order.Order;
 import com.es.phoneshop.model.product.ArrayListProductDao;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
     private static volatile OrderServiceImpl instance;

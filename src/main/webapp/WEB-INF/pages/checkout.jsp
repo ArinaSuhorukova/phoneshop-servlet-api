@@ -64,6 +64,25 @@
         <br><br>
         <input name="phone" placeholder="phone">
 <br><br>
+        <table>
+            <tr>
+                <td>Delivery method</td>
+                <td>Cost</td>
+            </tr>
+            <c:forEach var="item" items="${deliveryOptions}">
+            <tr>
+                <td>${item.key}</td>
+                <td>${item.value}</td>
+            </tr>
+            </c:forEach>
+        </table>
+        <br><br>
+        <select>
+            <c:forEach var="item" items="${deliveryOptions}">
+                <option>${item.key}</option>
+            </c:forEach>
+        </select>
         <button>Place order</button>
+        <br><br>
     </form>
 </tags:master>

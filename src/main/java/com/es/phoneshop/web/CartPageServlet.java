@@ -16,7 +16,6 @@ import java.util.*;
 public class CartPageServlet extends HttpServlet  {
     private  ArrayListProductDao dao;
     private CartService cartService;
-
     @Override
     protected void doGet (HttpServletRequest request, HttpServletResponse response) throws NoSuchElementException, ServletException, IOException {
 
@@ -30,6 +29,7 @@ public class CartPageServlet extends HttpServlet  {
         super.init();
         dao = ArrayListProductDao.getInstance();
         cartService = CartServiceImpl.getInstance();
+
 
     }
 

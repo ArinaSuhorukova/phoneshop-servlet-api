@@ -1,4 +1,4 @@
-package com.es.phoneshop.model;
+package com.es.phoneshop.model.beans;
 
 public class UserBean {
     private String name;

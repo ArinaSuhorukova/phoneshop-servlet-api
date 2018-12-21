@@ -6,6 +6,7 @@ import com.es.phoneshop.model.cart.CartService;
 import com.es.phoneshop.model.cart.CartServiceImpl;
 import com.es.phoneshop.model.cart.ViewedProductsService;
 import com.es.phoneshop.model.cart.ViewedProductsServiceImpl;
+import com.es.phoneshop.model.review.ArrayListReviewDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +19,7 @@ public class ProductDetailsPageServlet extends HttpServlet {
     private ArrayListProductDao dao;
     private CartService cartService;
     private ViewedProductsService viewedProductsService;
+    private ArrayListReviewDao arrayListReviewDao;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws NoSuchElementException, ServletException, IOException {
@@ -27,6 +29,7 @@ public class ProductDetailsPageServlet extends HttpServlet {
             request.setAttribute("product", product);
             request.setAttribute("viewedProducts", viewedProductsService.getList());
             request.setAttribute("cart", cartService.getCard(request.getSession()));
+            request.setAttribute("reviews", arrayListReviewDao.getReviews());
             request.getRequestDispatcher("/WEB-INF/pages/product.jsp").forward(request, response);
             viewedProductsService.addToViewedProducts(product);
         } catch (NoSuchElementException ex) {
@@ -41,6 +44,7 @@ public class ProductDetailsPageServlet extends HttpServlet {
         dao = ArrayListProductDao.getInstance();
         cartService = CartServiceImpl.getInstance();
         viewedProductsService = new ViewedProductsServiceImpl();
+        arrayListReviewDao = ArrayListReviewDao.getInstance();
 
     }
 

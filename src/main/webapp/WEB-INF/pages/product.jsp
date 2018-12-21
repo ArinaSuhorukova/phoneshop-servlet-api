@@ -4,7 +4,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
 <jsp:useBean id="product" type="com.es.phoneshop.model.product.Product" scope="request"/>
-<tags:master pageTitle="${product.description}" >
+<tags:master pageTitle="${product.description}">
     <form method="get" action="<c:url value="/cart"/>">
         <button>Go to cart</button>
     </form>
@@ -54,5 +54,35 @@
             </c:forEach>
         </tr>
     </table>
+    <br>
+    <p>
+        Reviews
+    </p>
+    <table border="1">
+        <tr>
+            <c:forEach var="review" items="${reviews}">
+                <td>
+                        ${review.name}<br>
+                        ${review.comment}<br>
+                        ${review.rating}<br>
+                </td>
+            </c:forEach>
+        </tr>
+    </table>
+
+
+    <br>
+    <form method="post" action="${pageContext.servletContext.contextPath}/products/addReview/${product.id}">
+        <br>
+        <input name="name" placeholder="name">
+        <br><br>
+        <input name="rating" placeholder="rating">
+        <br><br>
+        <input name="comment" placeholder="comment">
+        <br>
+        <button>Add</button>
+
+    </form>
+
 
 </tags:master>
